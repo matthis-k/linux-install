@@ -15,8 +15,8 @@ git clone https://github.com/matthis-k/config
 git clone https://github.com/matthis-k/config-manager
 sudo config-manager/deploy-config  ~/config
 sudo pacman -Syy --noconfirm
-echo HEREREOÖHDFÖSSDFHÖSDOHFOÖSAHDÖFHASÖFHÖOASHFÖASHFÖJASÖAJBFHOSAUBFUABSBFUSABDUASÖFHSAÖDUHNÖAHSNFCÖASJHNF
-config-manager/install-needed-packags ~/config
+chmod +x config-manager/install-needed-packages
+config-manager/install-needed-packages ~/config
 sudo systemctl enable sddm
 sudo systemctl enable preload
 sudo systemctl enable iwd
