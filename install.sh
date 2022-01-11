@@ -9,7 +9,7 @@ sudo mkinitcpio -P
 passwd
 sudo grub-install --target=i386-pc /dev/vda
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-sudo pacman -Syy rustup base-devel git
+sudo pacman -Syy rustup base-devel git --noconfirm
 rustup toolchain add nightly && rustup toolchain add stable && rustup default nightly
 git clone https://github.com/matthis-k/config
 git clone https://github.com/matthis-k/config-manager
