@@ -1,0 +1,31 @@
+{
+  "audio": "pipewire",
+  "bootloader": "systemd-bootctl",
+  "harddrives": [
+    "/dev/vda"
+  ],
+  "hostname": "vm",
+  "kernels": [
+    "linux"
+  ],
+  "keyboard-layout": "de",
+  "mirror-region": "Germany",
+  "nic": {
+    "NetworkManager": false
+  },
+  "ntp": true,
+  "packages": [
+    "git",
+    "rustup",
+    "base-devel",
+    "man-pages",
+    "man-db",
+    "texinfo"
+  ],
+  "profile": null,
+  "script": "guided",
+  "swap": false,
+  "sys-encoding": "utf-8",
+  "sys-language": "en_US",
+  "timezone": "Europe/Berlin"
+}
