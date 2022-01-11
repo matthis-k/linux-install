@@ -16,6 +16,7 @@ git clone https://github.com/matthis-k/config-manager
 (
     cd config-manager/
     sudo ./deploy-config  ~/config
+    sudo pacman -Syyu
     ./install-needed-packags ~/config
 )
 sudo systemctl enable sddm
