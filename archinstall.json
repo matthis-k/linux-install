@@ -1,17 +1,19 @@
 {
   "audio": "pipewire",
-  "bootloader": "systemd-bootctl",
+  "bootloader": "grub-install",
   "harddrives": [
-    "/dev/vda"
+    "/dev/sda"
   ],
-  "hostname": "vm",
+  "filesystem": "ext4",
+  "hostname": "edit this",
   "kernels": [
     "linux"
   ],
-  "keyboard-layout": "de",
+  "keyboard-language": "de",
   "mirror-region": "Germany",
   "nic": {
-    "NetworkManager": false
+    "NetworkManager": false,
+    "nic": "wlan0"
   },
   "ntp": true,
   "packages": [
@@ -20,12 +22,19 @@
     "base-devel",
     "man-pages",
     "man-db",
-    "texinfo"
+    "texinfo",
+    "iwd"
   ],
   "profile": null,
   "script": "guided",
   "swap": false,
   "sys-encoding": "utf-8",
   "sys-language": "en_US",
-  "timezone": "Europe/Berlin"
+  "timezone": "Europe/Berlin",
+  "users": {},
+  "superusers": {
+    "matthisk": {
+      "!password": "pw"
+    }
+  }
 }
