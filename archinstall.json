@@ -1,9 +1,9 @@
 {
   "audio": "pipewire",
   "bootloader": "grub-install",
-  "harddrive": [
-    "/dev/sda"
-  ],
+  "harddrive": {
+    "path": "/dev/sda"
+  },
   "filesystem": "ext4",
   "hostname": "edit this",
   "kernels": [
