@@ -5,7 +5,10 @@
     "path": "/dev/sda"
   },
   "filesystem": "ext4",
-  "hostname": "edit this",
+  "hostname": "matthisk-[]",
+  "custom-commands": [
+    "chsh -s /bin/fish"
+  ],
   "kernels": [
     "linux"
   ],
@@ -23,7 +26,8 @@
     "man-pages",
     "man-db",
     "texinfo",
-    "iwd"
+    "iwd",
+    "fish"
   ],
   "profile": null,
   "script": "guided",
