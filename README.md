@@ -60,12 +60,38 @@ NOTE: right now `wireplumber` is in conflict with `pipewire-media-session`, whic
   sudo mkswap /swapfile
   sudo swapon /swapfile
   ```
+
   - Update `/etc/fstab` by adding `/swapfile none swap defaults 0 0`
+  ```
+  echo /swapfile none swap defaults 0 0 | sudo tee -a /etc/fstab
+  ```
   - Update grub: - In `/etc/default/grub` add a kernel parameter called resume and resume offset.  
     It should look something like this:  
     `GRUB_CMDLINE_LINUX="resume=/dev/sdb2 resume_offset=2932736"`  
     Where:  
     `resume`: `findmnt -no UUID -T /swapfile`, or you know its partition (here `/dev/sdb2`)
     `resume_offset`: `filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}'`
+  - the following command should generate the file correctly:
+    ```
+    sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="resume='(findmnt -n -T /swapfile | awk '{print $2}' | sed 's#/#\\\/#g')' resume_offset='(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')'"/g' /etc/default/grub | sudo tee /etc/default/grub
+    ```
+    - NOTE: using `/dev/sdx` always worked for me. If it does not work for you, just replace the `findmnt` command with the one above, which returns the UUID
   - `sudo update-grub` OR `sudo grub-mkconfig -o /boot/grub/grub.cfg`
   - `sudo mkinitcpio -P`
+ - So in total this is:
+ ```
+sudo fallocate -l 17G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo /swapfile none swap defaults 0 0 | sudo tee -a /etc/fstab
+sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="resume='\
+(findmnt -n -T /swapfile | awk '{print $2}' | sed 's#/#\\\/#g')\
+' resume_offset='(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')'"/g' /etc/default/grub\
+| sudo tee /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo mkinitcpio -P
+
+ ```
+
+  
