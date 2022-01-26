@@ -96,4 +96,13 @@ sudo mkinitcpio -P
 
  ```
 
-  
+ NOTE: On my (intel) laptop  I also had to:
+ - Enable a kernel module:
+```
+sed 's/MODULES=(\(.*\))/MODULES=(\1 )/g' /etc/mkinitcpio.conf | sudo tee /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+```
+ - Change HibernationMode:
+```
+sed 's/#\?\(HibernateMode\)=\(.*\)/\1=shutdown/g' /etc/systemd/sleep.conf | sudo tee /etc/systemd/sleep.conf
+```
