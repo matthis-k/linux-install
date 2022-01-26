@@ -76,6 +76,7 @@ NOTE: right now `wireplumber` is in conflict with `pipewire-media-session`, whic
     sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="resume='(findmnt -n -T /swapfile | awk '{print $2}' | sed 's#/#\\\/#g')' resume_offset='(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')'"/g' /etc/default/grub | sudo tee /etc/default/grub
     ```
     - NOTE: using `/dev/sdx` always worked for me. If it does not work for you, just replace the `findmnt` command with the one above, which returns the UUID
+  - Add kernel hook: `sed 's/HOOKS=(\(.*\))/HOOKS=(\1 resume)/g' /etc/mkinitcpio.conf | sudo tee /etc/mkinitcpio.conf`
   - `sudo update-grub` OR `sudo grub-mkconfig -o /boot/grub/grub.cfg`
   - `sudo mkinitcpio -P`
  - So in total this is:
@@ -89,6 +90,7 @@ sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="resume='\
 (findmnt -n -T /swapfile | awk '{print $2}' | sed 's#/#\\\/#g')\
 ' resume_offset='(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')'"/g' /etc/default/grub\
 | sudo tee /etc/default/grub
+sed 's/HOOKS=(\(.*\))/HOOKS=(\1 resume)/g' /etc/mkinitcpio.conf | sudo tee /etc/mkinitcpio.conf
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo mkinitcpio -P
 
