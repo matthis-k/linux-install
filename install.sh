@@ -16,9 +16,6 @@ rustup toolchain add nightly && rustup toolchain add stable && rustup default ni
 git clone https://github.com/matthis-k/config
 git clone https://github.com/matthis-k/config-manager
 sudo config-manager/full-install  ~/config
-sudo pacman -Syy --noconfirm
-chmod +x config-manager/install-needed-packages
-config-manager/install-needed-packages ~/config
 sudo systemctl enable sddm
 sudo systemctl enable preload
 sudo systemctl enable iwd
