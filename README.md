@@ -7,6 +7,7 @@
      * [Set up nordvpn](#set-up-nordvpn)
      * [Hibernation](#set-up-hibernation)
        * [Not working?](#not-working-on-laptops?)
+     * [Ssh](#ssh)
 
 This is assuming you use the live installation media provided by [the offical website](https://archlinux.org/download/)
 
@@ -96,3 +97,17 @@ Try this:
     ```
     sed 's/#\?\(HibernateMode\)=\(.*\)/\1=shutdown/g' /etc/systemd/sleep.conf | sudo tee /etc/systemd/sleep.conf
     ```
+#### Ssh
+How to set up ssh?  
+It is quite simple:
+On local machine:
+```
+ssh-keygen -t rsa -b 4096
+ssh-add <path-to-private-key> # ~/.ssh/id_rsa by default
+# scp works just like cp, except that you have to prefix the remote machine with <remote-user>@<remote-address>:/absolute/path
+scp <path-to-public-key> <remote>@<remote-adress>:<path-to-.ssh-directory>
+```
+On remote machine:
+```
+cat <path-to-pub-key> >> ~/.ssh/authorized_keys
+```
