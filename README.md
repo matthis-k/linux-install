@@ -110,4 +110,6 @@ scp <path-to-public-key> <remote>@<remote-adress>:<path-to-.ssh-directory>
 On remote machine:
 ```
 cat <path-to-pub-key> >> ~/.ssh/authorized_keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/*
 ```
